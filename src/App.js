@@ -1,29 +1,32 @@
 import React, { Component } from "react";
-import { observer, inject } from "mobx-react";
-import Header from "./components/Header";
-import "./App.css";
+import { observer } from "mobx-react";
 
-@inject("MoviesStore")
-@observer
+import Header from "./components/Header";
+import Search from "./components/Search";
+import MoviePage from "./pages/moviePage";
+import movieStore from "./store/moviesStore";
+
+import { getMoviesService, showMoviesService } from "./services/moviesService";
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    props.MoviesStore.addMovies();
+  constructor() {
+    super();
   }
+
+  componentDidMount() {}
+
   render() {
     return (
-      <div className="App">
+      <div>
         <Header />
-        <ul>
-          {MoviesStore.movies.data.map((Name, imbdID) => (
-            <li key={imbdID}>
-              <h4>Movie name: {movies.Name}</h4>
-              <img src={movies.Poster} />
-            </li>
-          ))}
-        </ul>
+        <Search getMoviesService={getMoviesService} />
+        <MoviePage
+          MovieData={movieStore}
+          showMoviesService={showMoviesService}
+        />
       </div>
     );
   }
 }
+
 export default App;

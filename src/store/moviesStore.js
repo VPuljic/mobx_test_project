@@ -1,19 +1,36 @@
-import { observable, computed, action } from "mobx";
+import { observable, action, runInAction, decorate } from "mobx";
+import { MoviesService } from "../services/MoviesService";
 
-class Store {
-  @observable Title;
-  @observable Year;
-  @observable Poster;
-  @observable imdbID;
+class moviesStore {
+  moviesList = {};
 
   constructor() {
-    (this.Title = null),
-      (this.Year = null),
-      (this.Poster = null),
-      (this.imdbID = false);
+    this.moviesService = new MoviesService();
   }
+  setMoviesList = (apiData) => {
+    this.moviesList = apiData;
+  };
+
+  getMovies = () => {
+    this.moviesService.getMovies().then((data) => {
+      runInAction(() => {
+        this.setMoviesList(data);
+      });
+    });
+  };
+
+  getMoviesAsync = async () => {
+    const data = await this.moviesService.getMovies();
+
+    runInAction(() => {
+      this.moviesList = data;
+    });
+  };
 }
 
-let movieStore = new Store();
+decorate(moviesStore, {
+  moviesList: observable,
+  setMoviesList: action,
+});
 
-export default movieStore;
+export default new moviesStore();

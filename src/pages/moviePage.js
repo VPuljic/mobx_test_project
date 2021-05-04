@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Movie from "../components/Movie";
 import { observer } from "mobx-react";
 
-@observer
 class MoviePage extends Component {
   constructor(props) {
     console.log("data container props", props);
@@ -10,7 +9,7 @@ class MoviePage extends Component {
   }
 
   renderingLogic() {
-    return this.props.movieData.showFlag && this.props.movieData.Title ? (
+    return this.props.movieData.Title ? (
       <Movie
         Title={this.props.movieData.Title}
         Year={this.props.movieData.Year}

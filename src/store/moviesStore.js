@@ -1,5 +1,6 @@
-import { observable, action, runInAction, decorate } from "mobx";
-import { MoviesService } from "../services/MoviesService";
+import { observable, action, runInAction, decorate, configure } from "mobx";
+import MoviesService from "../services/MoviesService";
+configure({ enforceActions: "observed" });
 
 class moviesStore {
   moviesList = {};

@@ -1,22 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from "./components/Header";
 import MoviePage from "./pages/moviePage";
+import SearchPage from "./pages/searchPage";
+import { observer } from "mobx-react";
 
-class App extends Component {
-  constructor() {
-    super();
-  }
-
-  componentDidMount() {}
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <MoviePage />
-      </div>
-    );
-  }
-}
+const App = observer(() => {
+  return (
+    <div>
+      <Header />
+      <SearchPage />
+      <MoviePage />
+    </div>
+  );
+});
 
 export default App;

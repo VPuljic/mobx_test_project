@@ -1,34 +1,18 @@
-import * as React from "react";
-import { observer, inject } from "mobx-react";
+import React from "react";
+import { observer } from "mobx-react";
+import Store from "../store/moviesStore";
 
-class MoviePage extends React.Component {
-  componentDidMount() {
-    this.props.moviesStore.getMovies();
-  }
+const MoviePage = observer(() => {
+  return (
+    <div>
+      {Store.data.map((movie) => (
+        <h4 key={movie.imbdID}>
+          {movie.Title}
+          {movie.imbdID}
+        </h4>
+      ))}
+    </div>
+  );
+});
 
-  render() {
-    return (
-      <div>
-        <input type="search" placeholder="Search" />
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>imdbID</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.moviesStore.moviesList.model.map((movie) => (
-              <tr key={movie.imbdID}>
-                <td>{movie.Title}</td>
-                <td>{movie.imbdID}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
-
-export default inject("moviesStore")(observer(moviesList));
+export default MoviePage;

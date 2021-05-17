@@ -3,6 +3,7 @@ import { moviesService } from "../services/moviesService";
 
 class Store {
   data = [];
+  query = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -14,6 +15,10 @@ class Store {
 
   setMoviesList(data) {
     this.data = data;
+  }
+
+  setQuery(query) {
+    this.query = query;
   }
 }
 

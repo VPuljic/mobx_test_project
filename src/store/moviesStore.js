@@ -9,12 +9,12 @@ class Store {
   }
 
   setMoviesList = (data) => {
-    this.data = data;
+    this.data = new data();
   };
 
-  setQuery(query) {
-    this.query = query;
-  }
+  setQuery = (query) => {
+    this.query = new query();
+  };
 }
 
 export default new Store();
